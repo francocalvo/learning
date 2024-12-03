@@ -37,41 +37,49 @@ func operate_mul(vals string) int {
 func main() {
 	file, err := os.Open("input.txt")
 	if err != nil {
-		fmt.Println(err)
 		return
 	}
 
 	sum := 0
 
 	buf := bufio.NewReader(file)
+	// It starts enabled
 	enabled := true
 	for {
+		// Iterate over each line of the input file
 		line, err := buf.ReadString('\n')
 		if err == io.EOF {
 			break
 		}
 
 		for cur := 0; cur < len(line)-8; {
-			fmt.Println("Line max: ", len(line), "Cur: ", cur, "Line - 8: ", len(line)-8)
+			// For each line, iterate over each character.
 			if enabled {
+				// If we are enabled, we can check for the don't() and mul() functions
 				if line[cur:cur+7] == "don't()" {
+					// If we find the don't() function, we disable the enabled flag and skip 7 characters
 					enabled = false
 					cur += 7
 					continue
 				}
 				if line[cur:cur+4] == "mul(" {
-					fmt.Println("Found mulc")
+					// If we find the mul() function, we iterate over the next 12 characters to find the closing parenthesis
+					advanced := false
 					for f_curr := cur + 5; f_curr < len(line) && f_curr <= cur+12; f_curr++ {
 						if line[f_curr] == ')' {
-							fmt.Println("Between ", cur, f_curr, line[cur+4:f_curr])
-							fmt.Println("Number: ", line[cur+4:f_curr])
 							sum += operate_mul(line[cur+4 : f_curr])
 							cur = f_curr
+							advanced = true
 							break
 						}
 					}
+					if !advanced {
+						// If we didn't find the closing parenthesis skip 4 characters
+						cur += 4
+					}
 				}
 			} else {
+				// if we are disabled, we only check for the do() function
 				if line[cur:cur+4] == "do()" {
 					enabled = true
 					cur += 4
@@ -83,7 +91,3 @@ func main() {
 
 	fmt.Println("Sum: ", sum)
 }
-
-
-// 81458033 too high
-// first line:  13189667
