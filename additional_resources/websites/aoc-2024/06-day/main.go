@@ -1,3 +1,10 @@
+// Before reading the puzzle correcly, I wanted to know the _distance_ the
+// patrol went through. I did a matrix with the distances to the next block,
+// being the block a wall or the end of the grid. Then, I started to iterate
+// through the grid, updating the position and the direction of the patrol.
+// This is not question. I needed the distinct positions the patrol went through
+//
+
 package main
 
 import (
@@ -5,6 +12,8 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"slices"
+  "time"
 )
 
 func abs(x int) int {
@@ -14,80 +23,60 @@ func abs(x int) int {
 	return x
 }
 
+func print_map(grid [][]int, pos [3]int) {
+	for i, row := range grid {
+		for j, block := range row {
+			if i == pos[0] && j == pos[1] {
+				switch pos[2] {
+				case 0:
+					fmt.Print("^")
+				case 1:
+					fmt.Print(">")
+				case 2:
+					fmt.Print("v")
+				case 3:
+					fmt.Print("<")
+				}
+			} else if block == 1 {
+				fmt.Print("#")
+			} else {
+				fmt.Print(".")
+			}
+		}
+		fmt.Println()
+	}
+}
+
 func dis_to_incr(direction int) (int, int) {
 	switch direction {
 	case 0:
-		return 0, -1
-	case 1:
-		return 1, 0
-	case 2:
-		return 0, 1
-	case 3:
 		return -1, 0
+	case 1:
+		return 0, 1
+	case 2:
+		return 1, 0
+	case 3:
+		return 0, -1
 	default:
+		fmt.Println("Invalid direction")
 		return 0, 0
 	}
 }
 
-func get_distance_iter(grid [][]int, blocks_distances [][][4]int, x_pos, y_pos, dir int) int {
-  fmt.Println("%%%%%%%%%%%%%% Get distance iter")
-	fmt.Println("Pos:", x_pos, y_pos, dir)
-	if y_pos > len(grid) || x_pos > len(grid[0]) {
-		return 0
-	}
-
-	x_incr, y_incr := dis_to_incr(dir)
-	ex_x_pos := x_pos - x_incr
-	ex_y_pos := y_pos - y_incr
-  fmt.Println("Ex:", ex_x_pos, ex_y_pos)
-	if ex_x_pos > 0 && ex_y_pos > 0 {
-		fmt.Println("Skipping because of ex")
-		return blocks_distances[ex_x_pos][ex_y_pos][dir] + x_incr + y_incr
-	}
-
-	counter := 0
-	fmt.Println("Incr:", x_incr, y_incr)
-	for x_pos < len(grid[0]) && y_pos < len(grid) && grid[y_pos][x_pos] != '#' {
-		fmt.Println("Pos:", x_pos, y_pos, "Counter:", counter)
-		x_pos += x_incr
-		y_pos += y_incr
-    fmt.Println("Grid?")
-
-		if x_pos < 0 || y_pos < 0 {
-      fmt.Println("Breaking because of bounds")
-			break
-		}
-
-    fmt.Println("Grid?")
-    fmt.Println("Pos:", x_pos, y_pos, "Counter:", counter)
-		counter++
-	}
-	return counter
-}
-
-func get_distances(grid [][]int, blocks_distances [][][4]int) {
-	for y := 0; y < len(grid); y++ {
-		blocks_distances = append(blocks_distances, make([][4]int, 0))
-		for x := 0; x < len(grid[0]); x++ {
-      fmt.Println("")
-      fmt.Println("&&&&&&&&&&&&&%%%%%%%%%%%%%%&&&&&&&&&&&&&&&&")
-      fmt.Println("&&&&&&&&&&&&&%%%%%%%%%%%%%%&&&&&&&&&&&&&&&&")
-      fmt.Println("Getting distance for pos:", x, y)
-			if grid[y][x] == '#' {
-				blocks_distances[x] = append(blocks_distances[x], [4]int{0, 0, 0, 0})
-			}
-      fmt.Println("Not a wall")
-			blocks_distances[y] = append(blocks_distances[y], [4]int{0, 0, 0, 0})
-      fmt.Println("Getting distances")
-			for dir := 0; dir < 4; dir++ {
-        res := get_distance_iter(grid, blocks_distances, x, y, dir)
-				blocks_distances[x][y][dir] = res
-        fmt.Println(blocks_distances[x][y])
-			}
-		}
+func dir_to_txt(direction int) string {
+	switch direction {
+	case 0:
+		return "Up"
+	case 1:
+		return "Right"
+	case 2:
+		return "Down"
+	case 3:
+		return "Left"
+	default:
+		return "Invalid"
 	}
 }
-
 func main() {
 	fmt.Println("AoC 2024 - Day 6")
 	file, err := os.Open("input.txt")
@@ -100,7 +89,6 @@ func main() {
 	grid := make([][]int, 0)
 	// x, y, direction
 	// 0 = up, 1 = right, 2 = down, 3 = left
-	blocks_distances := make([][][4]int, 0)
 	var pos [3]int
 	cursor := 0
 	for {
@@ -117,22 +105,115 @@ func main() {
 				grid[cursor] = append(grid[cursor], 1)
 			} else if char == '^' {
 				grid[cursor] = append(grid[cursor], 0)
-				pos[0] = len(grid[cursor]) - 1
-				pos[1] = cursor
+				pos[0] = cursor
+				pos[1] = len(grid[cursor]) - 1
 				pos[2] = 0
 			}
 		}
 		cursor++
 	}
 
-	fmt.Println("Pos:", pos)
-	for _, row := range grid {
-		fmt.Println(row)
+  start := time.Now()
+
+	visited := make(map[[2]int][]int)
+	visited[[2]int{pos[0], pos[1]}] = []int{pos[2]}
+	count := 1
+
+	var initial_pos [3]int
+	initial_pos[0] = pos[0]
+	initial_pos[1] = pos[1]
+	initial_pos[2] = pos[2]
+
+	// Part 1
+	for {
+		incr_c, incr_r := dis_to_incr(pos[2])
+		next_pos := [3]int{pos[0] + incr_c, pos[1] + incr_r, pos[2]}
+		if next_pos[0] < 0 || next_pos[0] >= len(grid) || next_pos[1] < 0 || next_pos[1] >= len(grid[0]) {
+			if _, ok := visited[[2]int{pos[0], pos[1]}]; !ok {
+				if _, ok := visited[[2]int{pos[0], pos[1]}]; !ok {
+					visited[[2]int{pos[0], pos[1]}] = []int{pos[2]}
+				} else {
+					visited[[2]int{pos[0], pos[1]}] = append(visited[[2]int{pos[0], pos[1]}], pos[2])
+				}
+			}
+			break
+		}
+		if grid[next_pos[0]][next_pos[1]] == 1 {
+			pos[2] = get_next_dir(pos[2])
+			continue
+		}
+		pos = next_pos
+		if _, ok := visited[[2]int{pos[0], pos[1]}]; !ok {
+			visited[[2]int{pos[0], pos[1]}] = []int{pos[2]}
+			count++
+		} else {
+			visited[[2]int{pos[0], pos[1]}] = append(visited[[2]int{pos[0], pos[1]}], pos[2])
+		}
 	}
 
-	get_distances(grid, blocks_distances)
+  fmt.Println("Part 1 took:", time.Since(start))
 
-	for _, row := range blocks_distances {
-		fmt.Println(row)
+	// Part 2
+	loops := 0
+	txt := make([]string, 0)
+	for k, v := range visited {
+		if [2]int{initial_pos[0], initial_pos[1]} == k {
+			continue
+		}
+
+		// Clone the grid
+		new_grid := make([][]int, 0)
+		for i := range grid {
+			new_row := make([]int, 0)
+			for j := range grid[i] {
+				new_row = append(new_row, grid[i][j])
+			}
+			new_grid = append(new_grid, new_row)
+		}
+		new_grid[k[0]][k[1]] = 1
+
+		// Clone the visited map
+		new_visited := make(map[[2]int][]int)
+
+		// Check if the new grid has a loop
+		if is_loop(new_grid, new_visited, initial_pos) {
+			loops++
+			txt = append(txt, fmt.Sprintf("Loop on %v with direction %v", k, v))
+		}
 	}
+
+  fmt.Println("Part 2 took:", time.Since(start))
+	fmt.Println("Visited:", count)
+	fmt.Println("Loops:", loops)
+}
+
+func is_loop(grid [][]int, visited map[[2]int][]int, pos [3]int) bool {
+	for {
+		incr_c, incr_r := dis_to_incr(pos[2])
+		next_pos := [3]int{pos[0] + incr_c, pos[1] + incr_r, pos[2]}
+		if next_pos[0] < 0 || next_pos[0] >= len(grid) || next_pos[1] < 0 || next_pos[1] >= len(grid[0]) {
+			break
+		}
+		if grid[next_pos[0]][next_pos[1]] == 1 {
+			pos[2] = get_next_dir(pos[2])
+			continue
+		}
+		pos = next_pos
+		if _, ok := visited[[2]int{pos[0], pos[1]}]; !ok {
+			visited[[2]int{pos[0], pos[1]}] = []int{pos[2]}
+		} else {
+			if slices.Contains(visited[[2]int{pos[0], pos[1]}], pos[2]) {
+				return true
+			}
+			visited[[2]int{pos[0], pos[1]}] = append(visited[[2]int{pos[0], pos[1]}], pos[2])
+		}
+	}
+	return false
+}
+
+func get_next_dir(dir int) int {
+	if dir == 3 {
+		return 0
+	}
+	return dir + 1
 }

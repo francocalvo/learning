@@ -1,0 +1,247 @@
+// Before reading the puzzle correcly, I wanted to know the _distance_ the 
+// patrol went through. I did a matrix with the distances to the next block,
+// being the block a wall or the end of the grid. Then, I started to iterate
+// through the grid, updating the position and the direction of the patrol.
+// This is not question. I needed the distinct positions the patrol went through
+// 
+
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"io"
+	"os"
+)
+
+func abs(x int) int {
+	if x < 0 {
+		return -x
+	}
+	return x
+}
+
+func dis_to_incr(direction int) (int, int) {
+	switch direction {
+	case 0:
+		return -1, 0
+	case 1:
+		return 0, 1
+	case 2:
+		return 1, 0
+	case 3:
+		return 0, -1
+	default:
+		fmt.Println("Invalid direction")
+		return 0, 0
+	}
+}
+
+func dir_to_txt(direction int) string {
+	switch direction {
+	case 0:
+		return "Up"
+	case 1:
+		return "Right"
+	case 2:
+		return "Down"
+	case 3:
+		return "Left"
+	default:
+		return "Invalid"
+	}
+}
+
+func get_distance_iter(grid [][]int, blocks_distances [][][5]int, r_pos, c_pos, dir int) int {
+	if r_pos == 9 || c_pos == 9 {
+		fmt.Println("%%%%%%%%%%%%%% Get distance iter")
+		fmt.Println("Pos:", r_pos, c_pos, "Dir:", dir_to_txt(dir))
+	}
+	if r_pos > len(grid) || c_pos > len(grid[0]) || r_pos < 0 || c_pos < 0 {
+		// fmt.Println("Breaking because of bounds")
+		return 0
+	}
+
+	r_incr, c_incr := dis_to_incr(dir)
+	ex_c_pos := c_pos - abs(c_incr)
+	ex_r_pos := r_pos - abs(r_incr)
+	if r_pos == 9 || c_pos == 9 {
+		fmt.Println("Ex:", ex_r_pos, ex_c_pos, "Dir:", dir_to_txt(dir), "Incr:", r_incr, c_incr)
+		fmt.Println("Incr:", r_incr, c_incr)
+	}
+	if ex_c_pos >= 0 && ex_r_pos >= 0 && blocks_distances[r_pos][c_pos][4] == 0 {
+		if r_pos == 9 || c_pos == 9 {
+			fmt.Println("Skipping because not border nor block")
+			fmt.Println("Positions: ", ex_r_pos, ex_c_pos)
+			fmt.Println("Block position:", blocks_distances[ex_r_pos][ex_c_pos])
+		}
+		return blocks_distances[ex_r_pos][ex_c_pos][dir] - c_incr - r_incr
+	}
+
+	if r_pos == 9 || c_pos == 9 {
+		fmt.Println("Checking block")
+		fmt.Println("Block:", blocks_distances[r_pos][c_pos][4])
+		fmt.Println("Dir:", dir)
+	}
+	if blocks_distances[r_pos][c_pos][4] == 1 && (dir == 0 || dir == 3) {
+		if r_pos == 9 || c_pos == 9 {
+			fmt.Println("Skipping dir ", dir_to_txt(dir), " because block")
+		}
+		return 0
+	}
+
+	counter := 0
+	if r_pos == 9 || c_pos == 9 {
+		fmt.Println("Not skipping")
+		fmt.Println("Initial conditions:")
+		fmt.Println("r_ros < len(grid):", r_pos < len(grid))
+		fmt.Println("c_pos < len(grid[0]):", c_pos < len(grid[0]))
+		fmt.Println("grid[r_pos][c_pos] != 1:", grid[r_pos][c_pos] != 1)
+		fmt.Println("Counter == 0:", blocks_distances[r_pos][c_pos][4] == 0)
+		fmt.Println("(grid[r_pos][c_pos] != 1 || counter == 0):", grid[r_pos][c_pos] != 1 || counter == 0)
+	}
+
+	for r_pos < len(grid) && c_pos < len(grid[0]) && (grid[r_pos][c_pos] != 1 || counter == 0) {
+		if r_pos == 9 || c_pos == 9 {
+			fmt.Println("Pos:", r_pos, c_pos, "Counter:", counter, "Simbol:", grid[r_pos][c_pos])
+		}
+		r_pos += r_incr
+		c_pos += c_incr
+		counter++
+		if r_pos < 0 || c_pos < 0 {
+			if r_pos == 9 || c_pos == 9 {
+				fmt.Println("Breaking because of bounds")
+			}
+			break
+		}
+	}
+	return counter
+}
+
+func get_distances(grid [][]int) [][][5]int {
+	blocks_distances := make([][][5]int, 0)
+	for r := 0; r < len(grid); r++ {
+		blocks_distances = append(blocks_distances, make([][5]int, 0))
+		for c := 0; c < len(grid[0]); c++ {
+			if r == 9 || c == 9 {
+				fmt.Println("")
+				fmt.Println("&&&&&&&&&&&&&%%%%%%%%%%%%%%&&&&&&&&&&&&&&&&")
+				fmt.Println("&&&&&&&&&&&&&%%%%%%%%%%%%%%&&&&&&&&&&&&&&&&")
+				fmt.Println("Getting distance for pos:", r, c)
+				fmt.Println("Line before: ", blocks_distances[r])
+			}
+
+			blocks_distances[r] = append(blocks_distances[r], [5]int{0, 0, 0, 0, grid[r][c]})
+
+			for dir := 0; dir < 4; dir++ {
+				res := get_distance_iter(grid, blocks_distances, r, c, dir)
+				if r == 9 || c == 9 {
+					fmt.Println("Res:", res)
+				}
+				blocks_distances[r][c][dir] = res
+			}
+			if r == 9 || c == 9 {
+				fmt.Println("Result for pos:", blocks_distances[r][c])
+				fmt.Println("Line result: ", blocks_distances[r])
+			}
+		}
+	}
+
+	return blocks_distances
+}
+
+func main() {
+	fmt.Println("AoC 2024 - Day 6")
+	file, err := os.Open("input.txt")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	buf := bufio.NewReader(file)
+	grid := make([][]int, 0)
+	// x, y, direction
+	// 0 = up, 1 = right, 2 = down, 3 = left
+	var pos [3]int
+	cursor := 0
+	for {
+		line, _, err := buf.ReadLine()
+		if err == io.EOF {
+			break
+		}
+		fmt.Println("Line:", string(line))
+		grid = append(grid, make([]int, 0))
+		for _, char := range line {
+			if char == '.' {
+				grid[cursor] = append(grid[cursor], 0)
+			} else if char == '#' {
+				grid[cursor] = append(grid[cursor], 1)
+			} else if char == '^' {
+				grid[cursor] = append(grid[cursor], 0)
+				pos[0] = cursor
+				pos[1] = len(grid[cursor]) - 1
+				pos[2] = 0
+			}
+		}
+		cursor++
+	}
+
+	for _, row := range grid {
+		fmt.Println(row)
+	}
+
+	blocks_distances := get_distances(grid)
+	fmt.Println("Blocks distances completed")
+	fmt.Println(grid)
+
+	for _, row := range blocks_distances {
+		for _, col := range row {
+			fmt.Print("  ", col)
+		}
+		fmt.Println("")
+	}
+
+	fmt.Println("")
+	fmt.Println("")
+	fmt.Println("")
+	fmt.Println("")
+	fmt.Println("Finding sol")
+
+	c := 1
+	for {
+		fmt.Println("Pos:", pos, "Dir:", dir_to_txt(pos[2]))
+		fmt.Println("Distance:", blocks_distances[pos[0]][pos[1]])
+		c = c + blocks_distances[pos[0]][pos[1]][pos[2]] - 1
+    fmt.Println("C:", c)
+		pos = get_next_pos(pos, blocks_distances)
+		c_incr, r_incr := dis_to_incr(pos[2])
+		fmt.Println("New pos:", pos)
+		if pos[0]+r_incr < 0 || pos[1]+c_incr < 0 || pos[0]+r_incr >= len(grid) || pos[1]+c_incr >= len(grid[0]) {
+			break
+		}
+		pos[2] = get_next_dir(pos[2])
+    fmt.Println("%%%%%%%%%%%%%%%%%%%%%")
+	}
+	fmt.Println("Result:", c)
+}
+
+func get_next_dir(dir int) int {
+	if dir == 3 {
+		return 0
+	}
+	return dir + 1
+}
+
+func get_next_pos(pos [3]int, blocks_distances [][][5]int) [3]int {
+	switch pos[2] {
+	case 0:
+		pos[0] = pos[0] - blocks_distances[pos[0]][pos[1]][0] + 1
+	case 1:
+		pos[1] = pos[1] + blocks_distances[pos[0]][pos[1]][1] - 1
+	case 2:
+		pos[0] = pos[0] + blocks_distances[pos[0]][pos[1]][2] - 1
+	case 3:
+		pos[1] = pos[1] - blocks_distances[pos[0]][pos[1]][3] + 1
+	}
+	return pos
+}
