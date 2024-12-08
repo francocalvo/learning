@@ -13,7 +13,9 @@ import (
 	"io"
 	"os"
 	"slices"
-  "time"
+	"sync"
+	"sync/atomic"
+	"time"
 )
 
 func abs(x int) int {
@@ -78,6 +80,7 @@ func dir_to_txt(direction int) string {
 	}
 }
 func main() {
+  load_time := time.Now()
 	fmt.Println("AoC 2024 - Day 6")
 	file, err := os.Open("input.txt")
 	if err != nil {
@@ -113,7 +116,9 @@ func main() {
 		cursor++
 	}
 
-  start := time.Now()
+  fmt.Println("Load time:", time.Since(load_time))
+
+	start := time.Now()
 
 	visited := make(map[[2]int][]int)
 	visited[[2]int{pos[0], pos[1]}] = []int{pos[2]}
@@ -151,40 +156,52 @@ func main() {
 		}
 	}
 
-  fmt.Println("Part 1 took:", time.Since(start))
+	fmt.Println("Part 1 took:", time.Since(start))
 
 	// Part 2
-	loops := 0
+	var loops atomic.Int64 // Thread-safe counter
 	txt := make([]string, 0)
+	var txtMutex sync.Mutex // Mutex for the txt slice since we'll be appending to it
+	var wg sync.WaitGroup   // WaitGroup to wait for all goroutines to finish
+
 	for k, v := range visited {
 		if [2]int{initial_pos[0], initial_pos[1]} == k {
 			continue
 		}
 
-		// Clone the grid
-		new_grid := make([][]int, 0)
-		for i := range grid {
-			new_row := make([]int, 0)
-			for j := range grid[i] {
-				new_row = append(new_row, grid[i][j])
+		wg.Add(1)
+		go func(k [2]int, v []int) {
+			defer wg.Done()
+
+			// Clone the grid
+			new_grid := make([][]int, 0)
+			for i := range grid {
+				new_row := make([]int, 0)
+				for j := range grid[i] {
+					new_row = append(new_row, grid[i][j])
+				}
+				new_grid = append(new_grid, new_row)
 			}
-			new_grid = append(new_grid, new_row)
-		}
-		new_grid[k[0]][k[1]] = 1
+			new_grid[k[0]][k[1]] = 1
 
-		// Clone the visited map
-		new_visited := make(map[[2]int][]int)
+			// Clone the visited map
+			new_visited := make(map[[2]int][]int)
 
-		// Check if the new grid has a loop
-		if is_loop(new_grid, new_visited, initial_pos) {
-			loops++
-			txt = append(txt, fmt.Sprintf("Loop on %v with direction %v", k, v))
-		}
+			// Check if the new grid has a loop
+			if is_loop(new_grid, new_visited, initial_pos) {
+				loops.Add(1) // Thread-safe increment
+				txtMutex.Lock()
+				txt = append(txt, fmt.Sprintf("Loop on %v with direction %v", k, v))
+				txtMutex.Unlock()
+			}
+		}(k, v)
 	}
+	wg.Wait() // Wait for all goroutines to finish
 
-  fmt.Println("Part 2 took:", time.Since(start))
+	fmt.Println("Part 2 took:", time.Since(start))
+  fmt.Println("Total time:", time.Since(load_time))
 	fmt.Println("Visited:", count)
-	fmt.Println("Loops:", loops)
+	fmt.Println("Loops:", loops.Load())
 }
 
 func is_loop(grid [][]int, visited map[[2]int][]int, pos [3]int) bool {
