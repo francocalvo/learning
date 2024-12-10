@@ -99,7 +99,7 @@ func main() {
 		if err == io.EOF {
 			break
 		}
-		fmt.Println("Line:", string(line))
+		// fmt.Println("Line:", string(line))
 		grid = append(grid, make([]int, 0))
 		for _, char := range line {
 			if char == '.' {
