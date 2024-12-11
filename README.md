@@ -7,6 +7,14 @@ courses, but I'll try to keep it all here.
 This repository is organized to reflect my learning path, including notes from
 courses, books, projects, and practice problems.
 
+Also, as a disclaimer of sorts, I think there are three types of learning:
+formal learning, non-formal learning and informal learning.
+
+This repo is for the second type: non-formal. As such, it doesn't include notes
+on things I learn day-to-day on the job or other types of personal projects.
+Also it doesn't include notes on my Civil Engineering clases at UTN FRP nor
+Software Engineering classes at UNL FICH.
+
 ## Table of Contents
 
 - [Introduction](#introduction)
