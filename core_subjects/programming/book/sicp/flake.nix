@@ -15,11 +15,14 @@
           inherit system;
           config.allowUnfree = true; # Propietary software
         };
+        # Create empty list if system is aarch64-darwin, else use mit-scheme
+        pkg_mitScheme =
+          if system == "aarch64-darwin" then [ ] else [ pkgs.mit-scheme ];
       in {
 
         devShells.default = pkgs.mkShell {
-          nativeBuildInputs = (with pkgs; [ nixpkgs-fmt lazygit mitscheme ])
-            ++ (with pkgs.nodePackages; [ markdownlint-cli ]);
+          nativeBuildInputs = (with pkgs; [ nixpkgs-fmt lazygit git ])
+            ++ (with pkgs.nodePackages; [ markdownlint-cli ]) ++ pkg_mitScheme;
         };
       });
 }

@@ -23,6 +23,6 @@
 
 (define (cuberoot x) (cubert-iter 1 x))
 
-(display "Trying cuberoot of 27\n")
-(display (exact->inexact (cuberoot 27)))
+(exact->inexact (cuberoot 27))
+(exact->inexact (cuberoot 125))
 
