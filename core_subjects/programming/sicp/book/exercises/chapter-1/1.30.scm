@@ -1,3 +1,8 @@
+;; Section 1.3.1 Procedures as Arguments
+;; Exercise 1.30
+;; The sum procedure above generates a linear recursion. 
+;; The procedure can be rewritten so that the sum is performed iteratively
+
 (define (sum term a next b)
   (define (iter a result)
     (if (> a b) 
@@ -31,47 +36,9 @@
     (/ h 3)
     (sum (fs f h a) 0 next n))))
 
-
-;; Claude says this is more idiomatic.
-;; ; Sum procedure - iteratively applies term from a to b
-;; (define (sum term a next b)
-;;   (if (> a b)
-;;       0
-;;       (+ (term a)
-;;          (sum term (next a) next b))))
-;;
-;; ; Simpson's Rule integration implementation
-;; (define (integral f a b n)
-;;   ; Ensure n is even
-;;   (if (odd? n)
-;;       (error "n must be even")
-;;       
-;;       (let ((h (/ (- b a) n)))
-;;         ; Create coefficient function for Simpson's Rule
-;;         (define (simpson-coefficient k)
-;;           (cond ((or (= k 0) (= k n)) 1)
-;;                 ((odd? k) 4)
-;;                 (else 2)))
-;;         
-;;         ; Function to evaluate at each point
-;;         (define (term k)
-;;           (* (simpson-coefficient k)
-;;              (f (+ a (* k h)))))
-;;         
-;;         ; Simple increment function
-;;         (define (next x) (+ x 1))
-;;         
-;;         ; Calculate integral using Simpson's Rule
-;;         (* (/ h 3)
-;;            (sum term 0 next n)))))
-
 ; Test function
 (define (cube x) (* x x x))
 
 ; Convert to decimal and compute integral
 (exact->inexact (integral cube 0 1 100000))
-
-(define (cube x) (* x x x))
-
 (integral cube 0 1 100)
-

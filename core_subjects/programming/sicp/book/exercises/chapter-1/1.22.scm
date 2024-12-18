@@ -13,7 +13,9 @@
   (find-divisor n 2))
 
 (define (prime? n) 
-  (= (smallest-divisor n) n))
+  (if (= n 1) 
+    #f
+    (= (smallest-divisor n) n)))
 
 (define (timed-prime-test n)
   (start-prime-test n (runtime)))
