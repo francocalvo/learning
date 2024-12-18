@@ -2,9 +2,10 @@
 
 ## Section 1.1.6 Conditional Expressions and Predicates
 
-### Exercise 1.3: 
+### Exercise 1.3:
 
-Define a procedure that takes three numbers as arguments and returns the sum of the squares of the two larger numbers.
+Define a procedure that takes three numbers as arguments and returns the sum of
+the squares of the two larger numbers.
 
 ```scm
 (define (maxsum a b c)
@@ -17,9 +18,11 @@ Define a procedure that takes three numbers as arguments and returns the sum of 
 (display (maxsum 1 2 3))
 ```
 
-### Exercise 1.8: 
+### Exercise 1.8:
 
-Newton's method for cube roots is based on the fact that if y is an approximation to the cube root of x, then a better approximation is given by the value
+Newton's method for cube roots is based on the fact that if y is an
+approximation to the cube root of x, then a better approximation is given by the
+value
 
 ```scm
 ( define (cubert-iter guess x)
@@ -48,9 +51,7 @@ Newton's method for cube roots is based on the fact that if y is an approximatio
 
 ```
 
-### Exercise : 
-
-
+### Exercise :
 
 ```scm
 (define (f_r n)
@@ -80,9 +81,7 @@ Newton's method for cube roots is based on the fact that if y is an approximatio
 (f_i 3)
 ```
 
-### Exercise : 
-
-
+### Exercise :
 
 ```scm
 (define (pascal col row)
@@ -100,9 +99,7 @@ Newton's method for cube roots is based on the fact that if y is an approximatio
 (pascal 3 5)
 ```
 
-### Exercise : 
-
-
+### Exercise :
 
 ```scm
 (define (even a) (= (remainder a 2) 0))
@@ -120,9 +117,7 @@ Newton's method for cube roots is based on the fact that if y is an approximatio
 (exp 3 3)
 ```
 
-### Exercise : 
-
-
+### Exercise :
 
 ```scm
 (define (double a) (* a 2))
@@ -139,9 +134,7 @@ Newton's method for cube roots is based on the fact that if y is an approximatio
 (mult 8 7)
 ```
 
-### Exercise : 
-
-
+### Exercise :
 
 ```scm
 (define (double a) (* a 2))
@@ -160,9 +153,7 @@ Newton's method for cube roots is based on the fact that if y is an approximatio
 (mult 8 7)
 ```
 
-### Exercise : 
-
-
+### Exercise :
 
 ```scm
 (define (smallest-divisor n)
@@ -182,9 +173,7 @@ Newton's method for cube roots is based on the fact that if y is an approximatio
 (smallest-divisor 19999)
 ```
 
-### Exercise : 
-
-
+### Exercise :
 
 ```scm
 (define (square x)
@@ -255,9 +244,7 @@ Newton's method for cube roots is based on the fact that if y is an approximatio
 ; (search-for-primes 1000000 10000000 3)
 ```
 
-### Exercise : 
-
-
+### Exercise :
 
 ```scm
 (define (square x)
@@ -328,9 +315,7 @@ Newton's method for cube roots is based on the fact that if y is an approximatio
 (search-for-primes 100000000000 10000000000000000 3)
 ```
 
-### Exercise : 
-
-
+### Exercise :
 
 ```scm
 (define (sum term a next b)
@@ -410,9 +395,7 @@ Newton's method for cube roots is based on the fact that if y is an approximatio
 
 ```
 
-### Exercise : 
-
-
+### Exercise :
 
 ```scm
 (define (sum term a next b)
@@ -493,4 +476,3 @@ Newton's method for cube roots is based on the fact that if y is an approximatio
 (integral cube 0 1 100)
 
 ```
-
