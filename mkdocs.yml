@@ -1,0 +1,5 @@
+# yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
+site_name: Calvo's learning
+site_url: https://mydomain.org/mysite
+theme:
+  name: material
