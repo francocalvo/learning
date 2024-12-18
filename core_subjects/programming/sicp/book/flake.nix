@@ -21,8 +21,12 @@
       in {
 
         devShells.default = pkgs.mkShell {
-          nativeBuildInputs = (with pkgs; [ nixpkgs-fmt lazygit git ])
-            ++ (with pkgs.nodePackages; [ markdownlint-cli ]) ++ pkg_mitScheme;
+          nativeBuildInputs = (with pkgs; [
+            nixpkgs-fmt
+            lazygit
+            git
+            chez
+          ]) ++ (with pkgs.nodePackages; [ markdownlint-cli ]) ++ pkg_mitScheme;
         };
       });
 }

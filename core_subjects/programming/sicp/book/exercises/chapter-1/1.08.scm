@@ -1,7 +1,9 @@
-(display "Exercise 1.8\n")
-(display "================\n")
+;; Section 1.1.7 Example: Square Roots by Newton's Method
+;; Exercise 1.8: 
+;; Newton's method for cube roots is based on the fact that if y is an 
+;; approximation to the cube root of x, then a better approximation is given
+;; by the value
 
-(display "Newton's method for cube root\n")
 ( define (cubert-iter guess x)
   ;; (display guess) (newline)
   (if (cube-good-enough? guess x)
