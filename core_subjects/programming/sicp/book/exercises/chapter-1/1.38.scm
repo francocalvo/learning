@@ -1,5 +1,5 @@
 ;; Section 1.3.3 Procedures as General Methods
-;; Exercise 1.38: 
+;; Exercise 1.38
 
 (define (cont-fract n d k)
   (define (cont-fract-inter n d k i)

@@ -1,7 +1,5 @@
 ;; Section 1.1.6 Conditional Expressions and Predicates
-;; Exercise 1.3:
-;; Define a procedure that takes three numbers as arguments and returns the
-;; sum of the squares of the two larger numbers.
+;; Exercise 1.3
 
 (define (maxsum a b c) 
   (cond 

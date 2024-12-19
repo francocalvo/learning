@@ -1,17 +1,5 @@
 ;; Section 1.3.1 Procedures as Arguments
 ;; Exercise 1.29
-;; Simpson's Rule is a more accurate method of numerical integration than the 
-;; method illustrated above. Using Simpson's Rule, the integral of a function 
-;; f between a and b is approximated as
-;; $3h[YO +4YI + 2Y2 +4Y3 +2Y4 +...+2Yn-2 +4Yn-1 +Yn]$
-;; where $h= (b-a)/n$,for some even integer n,and $Y_k = f(a+kh)$.
-;;
-;; (Increasing n increases the accuracy of the approximation.) 
-;;
-;; Define a procedure that takes as arguments f, a, b, and n and returns the 
-;; value of the integral, computed using Simpson's Rule. Use your procedure to 
-;; integrate cube between 0 and 1 (with n = 100 and n = 1000), and compare the
-;; results to those of the integral procedure shown above.
 
 (define (sum term a next b)
   (if (> a b) 

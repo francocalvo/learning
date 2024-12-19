@@ -1,3 +1,6 @@
+;; Section 1.2.4 Exponentiation
+;; Exercise 1.18
+
 (define (double a) (* a 2))
 (define (halve a) (/ a 2))
 (define (even? a) (= 0 (remainder a 2)))

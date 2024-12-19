@@ -1,18 +1,5 @@
 ;; Section 1.3.2 Constructing Procedures Using Lambda
-;; Exercise 1.34: 
-;; Suppose we define the procedure
-;; ```scheme
-;; (define (f g) (g 2))
-;; ```
-;; Then we have
-;; ```scheme
-;; (f square)
-;; 4
-;; (f (lambda (z) (* z (+ z 1)))) 6
-;; (f (lambda (z) (* z (+ z 1))))
-;;
-;; What happens if we (perversely) ask the interpreter to evaluate the 
-;; combination `(f f )`? Explain.
+;; Exercise 1.34
 
 
 (define (f g) (g 2))

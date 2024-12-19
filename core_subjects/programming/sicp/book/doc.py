@@ -4,87 +4,123 @@ from pathlib import Path
 
 # Define the root directory (where this script is located)
 ROOT_DIR = Path(__file__).parent.resolve()
-
-# Define paths
 EXERCISES_DIR = ROOT_DIR / "exercises"
-OUTPUT_DIR = ROOT_DIR  # Output Markdown files in the root directory
-MASTER_README = ROOT_DIR / "README.md"
+OUTPUT_DIR = ROOT_DIR
 
-# Function to extract information from a .scm file
+# SICP section to file number mapping
+SECTION_FILE_MAP = {
+    "1.1": "10",
+    "1.2": "11",
+    "1.3": "12",
+    "2.1": "14",
+    "2.2": "15",
+    "2.3": "16",
+    "2.4": "17",
+    "2.5": "18",
+    "3.1": "20",
+    "3.2": "21",
+    "3.3": "22",
+    "3.4": "23",
+    "3.5": "24",
+    "4.1": "26",
+    "4.2": "27",
+    "4.3": "28",
+    "4.4": "29",
+    "5.1": "31",
+    "5.2": "32",
+    "5.3": "33",
+    "5.4": "34",
+    "5.5": "35"
+}
+
+def get_file_number(section):
+    """Get the correct file number for a section"""
+    # Extract main section number (e.g., "1.1" from "1.1.6")
+    main_section = '.'.join(section.split('.')[:2])
+    return SECTION_FILE_MAP.get(main_section, "4")  # Default to 4 if not found
+
+def generate_section_link(section):
+    """Generate a link to the section in the SICP online book"""
+    section_match = re.match(r"(\d+\.\d+\.?\d*)", section)
+    if section_match:
+        section_num = section_match.group(1)
+        file_num = get_file_number(section_num)
+        base_url = f"https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-{file_num}.html"
+        return f"{base_url}#%_sec_{section_num}"
+    else:
+        raise ValueError(f"Invalid section title: {section}")
+
+def generate_exercise_link(exercise_num, section_title):
+    """Generate a link to the exercise in the SICP online book"""
+    file_num = get_file_number(section_title)
+    base_url = f"https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-{file_num}.html"
+    return f"{base_url}#%_thm_{exercise_num}"
+
+def handle_katex_in_comment(line):
+    """Preserve KaTeX expressions in comments by ensuring proper spacing"""
+    line = re.sub(r'(\$\$?)([^\$]+)(\$\$?)', lambda m: 
+                  ('\n\n' + m.group(0) + '\n\n') if m.group(1) == '$$' else m.group(0), 
+                  line)
+    return line
+
 def parse_scm_file(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
         lines = file.readlines()
 
     section_title = ""
     exercise_number = ""
-    exercise_title = ""
-    exercise_description = []
-    content_segments = []  # List to hold tuples of (type, content)
-
-    current_code = []
-    in_metadata = True  # Flag to determine if we are still parsing metadata
+    content_segments = []
+    current_block = []
+    metadata_lines = []
+    in_metadata = True
 
     for line in lines:
         stripped_line = line.strip()
-
+        
+        # Handle metadata section
         if in_metadata:
             if stripped_line.startswith(";; Section"):
                 section_title = stripped_line.replace(";; Section", "").strip()
-                continue
+                metadata_lines.append(line)
             elif stripped_line.startswith(";; Exercise"):
-                # Parse Exercise Number and Title
-                exercise_num_match = re.match(r";; Exercise (\d+\.\d+):\s*(.*)", stripped_line)
-                if exercise_num_match:
-                    exercise_number = exercise_num_match.group(1)
-                    exercise_title = exercise_num_match.group(2)
-                continue
+                exercise_match = re.search(r";;\s*Exercise\s+([\d\.]+)", stripped_line)
+                if exercise_match:
+                    exercise_number = exercise_match.group(1)
+                metadata_lines.append(line)
             elif stripped_line.startswith(";;"):
-                # Assume description lines
-                desc = stripped_line.replace(";;", "").strip()
-                exercise_description.append(desc)
-                continue
+                metadata_lines.append(line)
             elif stripped_line == "":
-                # Blank line, possibly end of metadata
-                continue
+                metadata_lines.append(line)
             else:
-                # First code line detected
                 in_metadata = False
-                if not stripped_line.startswith(";;"):
-                    current_code.append(line.rstrip())
-                else:
-                    # Line starts with `;;` but we're out of metadata; treat as code comment
-                    current_code.append(line.rstrip())
+                current_block.append(line)
         else:
-            # In code mode
             if stripped_line.startswith(";;md"):
-                # Split code block at `;;md` comment
-                if current_code:
-                    code = "\n".join(current_code)
-                    content_segments.append(("code", code))
-                    current_code = []
-                # Add markdown comment
-                md_comment = stripped_line.replace(";;md", "").strip()
-                content_segments.append(("md", md_comment))
+                if current_block:
+                    content_segments.append(("code", "".join(current_block)))
+                    current_block = []
+                
+                md_content = stripped_line.replace(";;md", "").strip()
+                md_content = handle_katex_in_comment(md_content)
+                content_segments.append(("markdown", md_content))
             else:
-                # All other lines are part of code, including lines starting with `;;`
-                current_code.append(line.rstrip())
+                current_block.append(line)
 
-    # Append any remaining code after processing all lines
-    if current_code:
-        code = "\n".join(current_code)
-        content_segments.append(("code", code))
+    # Add any remaining code block
+    if current_block:
+        content_segments.append(("code", "".join(current_block)))
 
     return {
         "section_title": section_title,
+        "section_link": generate_section_link(section_title),
         "exercise_number": exercise_number,
-        "exercise_title": exercise_title,
-        "exercise_description": " ".join(exercise_description),
+        "exercise_link": generate_exercise_link(exercise_number, section_title),
+        "metadata": "".join(metadata_lines),
         "content_segments": content_segments
     }
 
-# Function to process each chapter
 def process_chapter(chapter_path):
-    chapter_name = chapter_path.name  # e.g., "chapter-1"
+    chapter_name = chapter_path.name
     chapter_number_match = re.match(r"chapter-(\d+)", chapter_name, re.IGNORECASE)
     if not chapter_number_match:
         print(f"Skipping unrecognized directory: {chapter_name}")
@@ -94,61 +130,46 @@ def process_chapter(chapter_path):
     markdown_filename = OUTPUT_DIR / f"chapter-{chapter_number}.md"
     print(f"Processing {chapter_name} -> {markdown_filename.name}")
 
-    # Collect all .scm files and sort them based on their numeric prefix
     scm_files = sorted(
         chapter_path.glob("*.scm"),
-        key=lambda x: int(x.stem.split('.')[1]) if len(x.stem.split('.')) > 1 and x.stem.split('.')[1].isdigit() else 0
+        key=lambda x: float(re.search(r"(\d+\.\d+)", x.stem).group(1)) if re.search(r"(\d+\.\d+)", x.stem) else 0
     )
 
     if not scm_files:
         print(f"No .scm files found in {chapter_name}. Skipping.")
         return None
 
-    # Initialize Markdown content
     markdown_content = f"# Chapter {chapter_number}\n\n"
-
-    current_section = None  # To track the current section and avoid duplication
+    current_section = None
 
     for scm_file in scm_files:
         data = parse_scm_file(scm_file)
 
-        # Add Section Title if it's new
-        if data["section_title"]:
-            if data["section_title"] != current_section:
-                markdown_content += f"## Section {data['section_title']}\n\n"
-                current_section = data["section_title"]
+        if data["section_title"] and data["section_title"] != current_section:
+            markdown_content += f"## [Section {data['section_title']}]({data['section_link']})\n\n"
+            current_section = data["section_title"]
 
-        # Add Exercise Header
-        exercise_num_formatted = data["exercise_number"]  # Already in X.Y format
-        exercise_title = data["exercise_title"]
-        markdown_content += f"### Exercise {exercise_num_formatted}: {exercise_title}\n\n"
+        markdown_content += f"### [Exercise {data['exercise_number']}]({data['exercise_link']})\n\n"
 
-        # Add Exercise Description
-        markdown_content += f"{data['exercise_description']}\n\n"
-
-        # Add Content Segments
         for segment_type, content in data["content_segments"]:
             if segment_type == "code":
-                markdown_content += "```scm\n"
-                markdown_content += f"{content}\n"
+                markdown_content += "```scheme\n"
+                markdown_content += content.rstrip() + "\n"
                 markdown_content += "```\n\n"
-            elif segment_type == "md":
-                markdown_content += f"{content}\n\n"
+            else:
+                markdown_content += content + "\n\n"
 
-    # Write to the Markdown file
     with open(markdown_filename, 'w', encoding='utf-8') as md_file:
         md_file.write(markdown_content)
 
-    print(f"Generated {markdown_filename.name}\n")
+    print(f"Generated {markdown_filename.name}")
     return markdown_filename.name
 
-# Main execution
 def main():
     if not EXERCISES_DIR.exists() or not EXERCISES_DIR.is_dir():
         print(f"Exercises directory not found at {EXERCISES_DIR}")
         return
 
-    # Find all chapter directories (e.g., chapter-1, chapter-2, ...)
     chapter_dirs = sorted(
         [d for d in EXERCISES_DIR.iterdir() if d.is_dir() and re.match(r"chapter-\d+", d.name, re.IGNORECASE)],
         key=lambda x: int(re.match(r"chapter-(\d+)", x.name, re.IGNORECASE).group(1))
@@ -158,17 +179,8 @@ def main():
         print("No chapter directories found.")
         return
 
-    generated_markdown_files = []
-
     for chapter_dir in chapter_dirs:
-        markdown_file = process_chapter(chapter_dir)
-        if markdown_file:
-            generated_markdown_files.append(markdown_file)
-
-    # Update the master README.md with links to all chapters
-    if not generated_markdown_files:
-        print("No Markdown files were generated.")
+        process_chapter(chapter_dir)
 
 if __name__ == "__main__":
     main()
-

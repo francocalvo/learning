@@ -1,5 +1,5 @@
 ;; Section 1.3.3 Procedures as General Methods
-;; Exercise 1.37: 
+;; Exercise 1.37
 
 (define (cont-fract n d k)
   (if (= k 0)

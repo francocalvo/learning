@@ -1,3 +1,6 @@
+;; Section 1.2.5 Greatest Common Divisors
+;; Exercise 1.21
+
 (define (smallest-divisor n)
   (define (divides? a b)
     (= (remainder b a) 0))
@@ -9,7 +12,8 @@
 
   (find-divisor n 2))
 
-;; I guess this made sense back then, but I don't see any runtime difference.
+;;md I guess this made sense back then, but I don't see any runtime difference.
+
 (smallest-divisor 199)
 (smallest-divisor 1999)
 (smallest-divisor 19999)

@@ -1,3 +1,6 @@
+;; Section 1.2.6 Example: Testing for Primality
+;; Exercise 1.23
+
 (define (square x)
   (* x x))
 

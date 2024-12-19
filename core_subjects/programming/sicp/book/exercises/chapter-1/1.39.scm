@@ -1,5 +1,5 @@
 ;; Section 1.3.3 Procedures as General Methods
-;; Exercise 1.39: 
+;; Exercise 1.39
 
 ;;md I create a more abstracted version of the cont-frac function.
 (define (cont-fract combinator null-value n d k)
