@@ -4,4 +4,12 @@
          <loc>https://mydomain.org/mysite/</loc>
          <lastmod>1980-01-01</lastmod>
     </url>
+    <url>
+         <loc>https://mydomain.org/mysite/core/programming/sicp/</loc>
+         <lastmod>1980-01-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/core/programming/sicp/chapter-1/</loc>
+         <lastmod>1980-01-01</lastmod>
+    </url>
 </urlset>
