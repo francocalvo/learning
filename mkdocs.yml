@@ -3,3 +3,8 @@ site_name: Calvo's learning
 site_url: https://mydomain.org/mysite
 theme:
   name: material
+  palette:
+      scheme: slate
+  features:
+    - navigation.tabs
+    - navigation.indexes

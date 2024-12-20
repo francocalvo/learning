@@ -5,7 +5,7 @@ from pathlib import Path
 # Define the root directory (where this script is located)
 ROOT_DIR = Path(__file__).parent.resolve()
 EXERCISES_DIR = ROOT_DIR / "exercises"
-OUTPUT_DIR = ROOT_DIR
+OUTPUT_DIR = ROOT_DIR / "exercises"
 
 # SICP section to file number mapping
 SECTION_FILE_MAP = {
@@ -165,7 +165,7 @@ def process_chapter(chapter_path):
     print(f"Generated {markdown_filename.name}")
     return markdown_filename.name
 
-def main():
+def make_doc():
     if not EXERCISES_DIR.exists() or not EXERCISES_DIR.is_dir():
         print(f"Exercises directory not found at {EXERCISES_DIR}")
         return
@@ -183,4 +183,4 @@ def main():
         process_chapter(chapter_dir)
 
 if __name__ == "__main__":
-    main()
+    make_doc()
