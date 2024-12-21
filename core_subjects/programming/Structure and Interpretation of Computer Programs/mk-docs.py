@@ -5,7 +5,7 @@ from pathlib import Path
 # Define the root directory (where this script is located)
 ROOT_DIR = Path(__file__).parent.resolve()
 EXERCISES_DIR = ROOT_DIR / "exercises"
-OUTPUT_DIR = ROOT_DIR / "exercises"
+OUTPUT_DIR = ROOT_DIR / "notes"
 
 # SICP section to file number mapping
 SECTION_FILE_MAP = {
@@ -127,7 +127,7 @@ def process_chapter(chapter_path):
         return None
 
     chapter_number = chapter_number_match.group(1)
-    markdown_filename = OUTPUT_DIR / f"chapter-{chapter_number}.md"
+    markdown_filename = OUTPUT_DIR / f"chapter-{chapter_number}-exercises.md"
     print(f"Processing {chapter_name} -> {markdown_filename.name}")
 
     scm_files = sorted(

@@ -25,23 +25,15 @@ def execute_make_docs(script_dir):
         sys.exit(1)
 
 
-def copy_markdown_files(src_dir, dst_dir):
+def copy_markdown_files(md_files: list[Path], dst_dir: Path):
     """
     Copies all .md files from src_dir to dst_dir.
     """
-    if not src_dir.exists():
-        print(
-            f"Warning: Source directory {src_dir} does not exist. Skipping.",
-            file=sys.stderr,
-        )
+    if not md_files:
+        print("No .md files found.")
         return
 
     dst_dir.mkdir(parents=True, exist_ok=True)
-    md_files = list(src_dir.glob("*.md"))
-
-    if not md_files:
-        print(f"No .md files found in {src_dir}.")
-        return
 
     for md_file in md_files:
         shutil.copy(md_file, dst_dir)
@@ -63,6 +55,13 @@ def copy_readme(src_dir, dst_dir):
     print(f"Copied {readme_src} to {index_dst}")
 
 
+def list_files(directory, filter):
+    """
+    Returns a list of files in the directory that match the filter.
+    """
+    return list(directory.glob(filter))
+
+
 def main():
     # Set up argument parser
     parser = argparse.ArgumentParser(description="Create a documentation structure.")
@@ -80,15 +79,18 @@ def main():
     # Step 1: Execute make-docs.py
     execute_make_docs(script_dir)
 
-    # Step 2: Copy all .md files from ./exercises to p/Exercises
-    exercises_src = script_dir / "exercises"
-    exercises_dst = destination_path / "Exercises"
-    copy_markdown_files(exercises_src, exercises_dst)
+    # Step 2: Copy all exercises to target directory
+    exercises_src = script_dir / "Notes"
+    exercises_filter = "chapter-[0-9]*-exercises.md"  # Matches exercise files like chapter-1-exercises.md
 
-    # Step 3: Copy all .md files from ./notes to p/notes
+    exercises_dst = destination_path / "Exercises"
+    copy_markdown_files(list_files(exercises_src, exercises_filter), exercises_dst)
+
+    # Step 3: Copy all notes to target directory
     notes_src = script_dir / "notes"
     notes_dst = destination_path / "notes"
-    copy_markdown_files(notes_src, notes_dst)
+    notes_filter = "chapter-[0-9].md"
+    copy_markdown_files(list_files(notes_src, notes_filter), notes_dst)
 
     # Step 4: Copy README.md to p/index.md
     copy_readme(script_dir, destination_path)

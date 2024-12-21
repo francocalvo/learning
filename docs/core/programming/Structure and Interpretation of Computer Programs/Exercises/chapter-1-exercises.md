@@ -647,3 +647,79 @@ The desired value is $\e - 2$ which is approximately 0.71828
 (display "done")
 ```
 
+## [Section 1.3.4: Procedures as General Methods](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-12.html#%_sec_1.3.4)
+
+### [Exercise 1.40](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-12.html#%_thm_1.40)
+
+```scheme
+(define (cubic a b c) (lambda (x) (+ (* x x x) (* a x x) (* b x) c)))
+```
+
+### [Exercise 1.41](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-12.html#%_thm_1.41)
+
+```scheme
+(define (double f)
+  (lambda (x) (f (f x))))
+
+(define (inc x) (+ x 1))
+
+(((double (double double)) inc) 5) ;; 21
+```
+
+### [Exercise 1.42](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-12.html#%_thm_1.42)
+
+```scheme
+(define (compose f g)
+  (lambda (x) (f (g x))))
+
+(define (square x) (* x x))
+(define (inc x) (+ x 1))
+
+((compose square inc) 6)
+```
+
+### [Exercise 1.43](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-12.html#%_thm_1.43)
+
+```scheme
+(define (compose f g)
+  (lambda (x) (f (g x))))
+
+(define (square x) (* x x))
+(define (inc x) (+ x 1))
+
+((compose square inc) 6)
+
+(define (repeated f n)
+  (define (iter res m)
+    (if (= m 0)
+      res
+      (iter (f res) (- m 1))))
+
+  (lambda (x) (iter x n)))
+
+((repeated square 2) 5)
+(define (compose f g)
+  (lambda (x) (f (g x))))
+
+(define (square x) (* x x))
+(define (inc x) (+ x 1))
+
+((compose square inc) 6)
+```
+
+### [Exercise 1.44](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-12.html#%_thm_1.44)
+
+```scheme
+(define dx 0.000001)
+
+(define soothe
+  (lambda (f)
+    (lambda (x)
+      (/ (+ (f (- x dx))
+            (f x)
+            (f (+ x dx)))
+         3))))
+
+;; I won't repeat the repeated procedure here, but it seems very straightforward.
+```
+
