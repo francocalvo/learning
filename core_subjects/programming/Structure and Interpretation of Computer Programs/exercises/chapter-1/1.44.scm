@@ -1,3 +1,6 @@
+;; Section 1.3.4: Procedures as General Methods
+;; Exercise 1.44
+
 (define dx 0.000001)
 
 (define soothe

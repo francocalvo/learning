@@ -1,3 +1,6 @@
+;; Section 1.3.4: Procedures as General Methods
+;; Exercise 1.43
+
 (define (compose f g)
   (lambda (x) (f (g x))))
 
