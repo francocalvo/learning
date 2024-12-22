@@ -136,3 +136,14 @@
   (if (= b 0)
       a
       (gcd b (remainder a b))))
+
+;;; Rational numbers implementation
+(define (make-rat n d)
+  (let ((abn (abs n)) (abd (abs d)))
+    (let ((a (gcd abn abd)))
+      (if (> 0 (* n d))
+        (cons (* -1 (/ abn a)) (/ abd a))
+        (cons (/ abn a) (/ abd a))))))
+
+(define (numer rn) (car rn))
+(define (denom rn) (cdr rn))
