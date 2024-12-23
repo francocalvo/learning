@@ -1,0 +1,1421 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://mydomain.org/mysite/core/programming/Structure%20and%20Interpretation%20of%20Computer%20Programs/Exercises/chapter-2-exercises/">
+      
+      
+        <link rel="prev" href="../chapter-1-exercises/">
+      
+      
+        <link rel="next" href="../../notes/chapter-1/">
+      
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>Chapter 2 - Calvo's learning</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-2" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../.." title="Calvo&#39;s learning" class="md-header__button md-logo" aria-label="Calvo's learning" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Calvo's learning
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter 2
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Teaching myself computer science
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../../" class="md-tabs__link">
+          
+  
+    
+  
+  Core
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="Calvo&#39;s learning" class="md-nav__button md-logo" aria-label="Calvo's learning" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Calvo's learning
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Teaching myself computer science
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Core
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Core
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Programming
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Programming
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_1" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Structure and Interpretation of Computer Programs
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2_1" id="__nav_2_2_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Structure and Interpretation of Computer Programs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_1_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_1_2" id="__nav_2_2_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Exercises
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_1_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Exercises
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter-1-exercises/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Chapter 2
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 2
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#section-211" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section 2.1.1
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 2.1.1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 2.1
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-212" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section 2.1.2
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 2.1.2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-22" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 2.2
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-213-what-is-meant-by-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section 2.1.3: What is meant by data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 2.1.3: What is meant by data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-204" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 2.04
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-205" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 2.05
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-214-extended-exercise-interval-arithmetic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section 2.1.4: Extended Exercise: Interval Arithmetic
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 2.1.4: Extended Exercise: Interval Arithmetic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-207" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 2.07
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-208" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 2.08
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-209" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 2.09
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-221-representing-sequences" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section 2.2.1: Representing sequences
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 2.2.1: Representing sequences">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-217" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 2.17
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-218" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 2.18
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-219" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 2.19
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-220" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 2.20
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-221" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 2.21
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-223" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 2.23
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-222-hierarchical-structures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section 2.2.2: Hierarchical Structures
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 2.2.2: Hierarchical Structures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-225" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 2.25
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_1_3" id="__nav_2_2_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Notes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            Notes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/chapter-1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#section-211" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section 2.1.1
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 2.1.1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 2.1
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-212" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section 2.1.2
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 2.1.2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-22" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 2.2
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-213-what-is-meant-by-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section 2.1.3: What is meant by data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 2.1.3: What is meant by data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-204" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 2.04
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-205" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 2.05
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-214-extended-exercise-interval-arithmetic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section 2.1.4: Extended Exercise: Interval Arithmetic
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 2.1.4: Extended Exercise: Interval Arithmetic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-207" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 2.07
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-208" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 2.08
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-209" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 2.09
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-221-representing-sequences" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section 2.2.1: Representing sequences
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 2.2.1: Representing sequences">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-217" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 2.17
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-218" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 2.18
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-219" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 2.19
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-220" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 2.20
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-221" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 2.21
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-223" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 2.23
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-222-hierarchical-structures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section 2.2.2: Hierarchical Structures
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 2.2.2: Hierarchical Structures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-225" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercise 2.25
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="chapter-2">Chapter 2</h1>
+<h2 id="section-211"><a href="https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-14.html#%_sec_2.1.1">Section 2.1.1</a></h2>
+<h3 id="exercise-21"><a href="https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-14.html#%_thm_2.1">Exercise 2.1</a></h3>
+<pre><code class="language-scheme">(load &quot;../utils.scm&quot;) ;; gcd implementation
+
+(define (make-rat n d)
+  (let ((abn (abs n)) (abd (abs d)))
+    (let ((a (gcd abn abd)))
+      (if (&gt; 0 (* n d))
+        (cons (* -1 (/ abn a)) (/ abd a))
+        (cons (/ abn a) (/ abd a))))))
+
+(define (numer rn) (car rn))
+(define (denom rn) (cdr rn))
+
+(define t (make-rat 6 -18))
+(numer t)
+(denom t)
+</code></pre>
+<h2 id="section-212"><a href="https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-14.html#%_sec_2.1.2">Section 2.1.2</a></h2>
+<h3 id="exercise-22"><a href="https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-14.html#%_thm_2.2">Exercise 2.2</a></h3>
+<pre><code class="language-scheme">(load &quot;../utils.scm&quot;) ; average implementation
+
+;; Point definition
+(define (make-point x y) (cons x y))
+(define (x-point p) (car p))
+(define (y-point p) (cdr p))
+
+;; Segment definition
+(define (make-segment a b) (cons a b))
+(define (segment-start s) (car s))
+(define (segment-end s)  (cdr s))
+
+(define (print-point p)
+  (newline)
+  (display &quot;(&quot;)
+  (display (x-point p))
+  (display &quot;,&quot;)
+  (display (y-point p))
+  (display &quot;)&quot;))
+
+(define (midpoint l)
+  (make-point 
+    (average 
+      (x-point (segment-start l))
+      (x-point (segment-end l)))
+    (average 
+      (y-point (segment-start l))
+      (y-point (segment-end l)))))
+
+
+(define seg (make-segment (make-point 0 0) (make-point 10 10)))
+
+(print-point (midpoint seg))
+</code></pre>
+<h2 id="section-213-what-is-meant-by-data"><a href="https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-14.html#%_sec_2.1.3">Section 2.1.3: What is meant by data</a></h2>
+<h3 id="exercise-204"><a href="https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-14.html#%_thm_2.04">Exercise 2.04</a></h3>
+<pre><code class="language-scheme">(define (cons x y)
+  (lambda (m) (m x y)))
+
+(define (cons s)
+  (s (lambda (x y) x)))
+
+(define (car z)
+  (z (lambda (x y) y)))
+
+
+(display (car (cons 1 2)))
+(newline)
+(display (cdr (cons 1 2)))
+</code></pre>
+<h3 id="exercise-205"><a href="https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-14.html#%_thm_2.05">Exercise 2.05</a></h3>
+<pre><code class="language-scheme">(define zero (lambda (f) (lambda (x) x)))
+
+(define add-1 (lambda (n) (lambda (f) (lambda (x) (f ((n f) x))))))
+
+(define one (lambda (f) (lambda (x) (f x))))
+
+(define two (lambda (f) (lambda (x) (f (f x)))))
+
+(define (sum a b)
+  (lambda (f)
+    (lambda (x)
+      ((a f) ((b f) x)))))
+</code></pre>
+<h2 id="section-214-extended-exercise-interval-arithmetic"><a href="https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-14.html#%_sec_2.1.4">Section 2.1.4: Extended Exercise: Interval Arithmetic</a></h2>
+<h3 id="exercise-207"><a href="https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-14.html#%_thm_2.07">Exercise 2.07</a></h3>
+<pre><code class="language-scheme">(define (make-interval a b) (cons a b))
+
+(define add-interval
+  (lambda (x y)
+    (make-interval (+ (lower-bound x) (lower-bound y))
+                   (+ (upper-bound x) (upper-bound y)))))
+
+(define mul-interval
+  (lambda (x y)
+    (let ((p1 (* (lower-bound x) (lower-bound y)))
+          (p2 (* (lower-bound x) (upper-bound y)))
+          (p3 (* (upper-bound x) (lower-bound y)))
+          (p4 (* (upper-bound x) (upper-bound y))))
+
+      (make-interval (min p1 p2 p3 p4) (max p1 p2 p3 p4)))))
+
+(define (div-interval x y)
+  (mul-interval 
+    x
+    (make-interval 
+      (/ 1.0 (upper-bound y))
+      (/ 1.0 (lower-bound y)))))
+</code></pre>
+<p>My code..</p>
+<pre><code class="language-scheme">(define upper-bound
+  (lambda (x)
+    (cdr x)))
+
+(define lower-bound
+  (lambda (x)
+    (car x)))
+</code></pre>
+<h3 id="exercise-208"><a href="https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-14.html#%_thm_2.08">Exercise 2.08</a></h3>
+<pre><code class="language-scheme">(load &quot;./2.07.scm&quot;)
+
+(define sub-interval
+  (lambda (x y)
+    (add-interval 
+      x 
+      (make-interval
+        (* -1 (lower-bound y))
+        (* -1 (upper-bound y))))))
+</code></pre>
+<h3 id="exercise-209"><a href="https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-14.html#%_thm_2.09">Exercise 2.09</a></h3>
+<pre><code class="language-scheme">(load &quot;2.08.scm&quot;)
+
+(define (with interval)
+  (/ (- (upper-bound interval) (lower-bound interval))
+     2.0))
+
+(define a (make-interval 5 10))
+(define b (make-interval 20 30))
+
+
+(display (with a)) ;; 2.5
+(display (with b)) ;; 5
+
+(display (with (add-interval a b))) ;; 7.5
+(display (with (sub-interval b a))) ;; 2.5
+
+(display (with (mul-interval a b))) ;; 100
+(display (with (div-interval b a))) ;; 2
+</code></pre>
+<h2 id="section-221-representing-sequences"><a href="https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-15.html#%_sec_2.2.1">Section 2.2.1: Representing sequences</a></h2>
+<h3 id="exercise-217"><a href="https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-15.html#%_thm_2.17">Exercise 2.17</a></h3>
+<pre><code class="language-scheme">(define (last-pair p)
+  (if (null? (cdr p))
+    (car p)
+    (last-pair (cdr p))))
+
+(last-pair (list 23 72 149 34))
+</code></pre>
+<h3 id="exercise-218"><a href="https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-15.html#%_thm_2.18">Exercise 2.18</a></h3>
+<pre><code class="language-scheme">(define (reverse p)
+  (if (null? (cdr p))
+    (car p)
+    (append (list (reverse (cdr p))) (car p))))
+
+(display (reverse (list 23 72 149 34)))
+</code></pre>
+<h3 id="exercise-219"><a href="https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-15.html#%_thm_2.19">Exercise 2.19</a></h3>
+<pre><code class="language-scheme">(define (cc amount coins)
+  (cond ((= amount 0) 1)
+        ((or (&lt; amount 0) (= (length coins) 0)) 0)
+        (else (+ (cc amount
+                     (cdr coins))
+                 (cc (- amount
+                       (car coins))
+                     coins)))))
+
+(define us-coins (list 1 5 10 25 50))
+(define uk-coins (list 1 2 5 10 20 50 100))
+
+(cc 100 us-coins)  ;;=&gt; 292
+</code></pre>
+<h3 id="exercise-220"><a href="https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-15.html#%_thm_2.20">Exercise 2.20</a></h3>
+<pre><code class="language-scheme">(define (same-parity . l)
+  (define (iter-sp res l rem)
+    (if (null? l)
+      res 
+      (if 
+        (= 
+          (remainder (car l) 2)
+          rem)
+        (iter-sp 
+          (append res (list (car l)))
+          (cdr l)
+          rem)
+        (iter-sp 
+          res 
+          (cdr l) 
+          rem))))
+
+  (iter-sp (list (car l)) (cdr l) (remainder (car l) 2)))
+
+(same-parity 1 2 3 4 5 6 7)
+</code></pre>
+<h3 id="exercise-221"><a href="https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-15.html#%_thm_2.21">Exercise 2.21</a></h3>
+<pre><code class="language-scheme">(load &quot;../utils.scm&quot;) ; square definition
+
+(define (square-list items)
+  (map square items))
+
+(square-list (list 1 2 3 4 5))
+</code></pre>
+<h3 id="exercise-223"><a href="https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-15.html#%_thm_2.23">Exercise 2.23</a></h3>
+<pre><code class="language-scheme">(define (for-each proc items)
+  (cond ((null? items) #t)
+        (else (proc (car items))
+              (for-each proc (cdr items)))))
+
+(for-each (lambda(x) (newline) (display x))
+          (list 57 321 88))
+</code></pre>
+<h2 id="section-222-hierarchical-structures"><a href="https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-15.html#%_sec_2.2.2">Section 2.2.2: Hierarchical Structures</a></h2>
+<h3 id="exercise-225"><a href="https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-15.html#%_thm_2.25">Exercise 2.25</a></h3>
+<pre><code class="language-scheme">(define a (list 1 3 (list 5 7) 9))
+(define b (list (list 7)))
+(define c (list 1 (list 2 (list 3 (list 4 (list 5 (list 6 7)))))))
+
+
+(car (cdaddr a))
+(caar b)
+(cadadr (cadadr (cadadr c))) 
+
+(define x (list 1 2 3))
+(define y (list 4 5 6))
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../../..", "features": ["navigation.tabs", "navigation.indexes"], "search": "../../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+    
+  </body>
+</html>
