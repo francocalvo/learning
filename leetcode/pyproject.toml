@@ -1,5 +1,5 @@
 [project]
-name = "leetcode"
+name = "python-lc"
 version = "0.1.0"
 description = "One too many hours were spent here"
 readme = "README.md"
