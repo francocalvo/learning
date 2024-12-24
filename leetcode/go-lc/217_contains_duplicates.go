@@ -1,4 +1,5 @@
 // 217: Contains Duplicate
+// Neetcode: "Arrays & Hashing"
 package main
 
 import (
@@ -19,7 +20,7 @@ func containsDuplicate(nums []int) bool {
 	return false
 }
 
-func main() {
+func e_217() {
 	// Convert the test inputs to []interface{} format
 	input := make([][]interface{}, 3)
 	input[0] = []interface{}{[]int{1, 2, 3, 1}}
@@ -30,14 +31,13 @@ func main() {
 
 	start := time.Now()
 
-	for i := 0; i < 1000000; i++ {
-		for j := 0; j < len(input); j++ {
-			result := containsDuplicate(input[j][0].([]int))
-			if result != expected[j] {
-				panic("Test failed!")
-			}
+	for j := 0; j < len(input); j++ {
+		result := containsDuplicate(input[j][0].([]int))
+		if result != expected[j] {
+			panic("Test failed!")
 		}
 	}
+
 	elapsed := time.Since(start).Seconds()
 	fmt.Println("217. Contains Duplicate", elapsed)
 }

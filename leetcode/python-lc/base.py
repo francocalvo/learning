@@ -17,7 +17,7 @@ class TestCase:
         method = getattr(self.solution, self.name)
         for i, e in zip(self.input, self.expected):
             print(f"Input: {i}. Expected: {e}.")
-            res = method(i)
+            res = method(*i)
             if res == e:
                 print("Passed.")
             else:
