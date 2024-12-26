@@ -9,7 +9,7 @@ import shutil
 # Value: Destination Path where documentation should be exported
 core_scripts = {
     "./teachyourselfcs/programming/Structure and Interpretation of Computer Programs/export.py": Path(
-        "./docs/core/programming/Structure and Interpretation of Computer Programs/"
+        "./docs/teachyourselfcs/programming/Structure and Interpretation of Computer Programs/"
     ),
 }
 

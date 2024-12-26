@@ -132,8 +132,3 @@ additional_resources/
       - Problems are categorized by difficulty and topic for targeted practice.
     - **tools/**: Learn about various tools and how to use them effectively.
     - **websites/**: Discover valuable online resources.
-
-## License
-
-This repository is for personal educational purposes. Please review the LICENSE
-file for more information.

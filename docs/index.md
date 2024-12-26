@@ -1,6 +1,6 @@
-# Teaching myself computer science
+# Learning
 
-This repo is a recompilation notes on books and courses. When needed, it'll
+This place is a recompilation notes on books and courses. When needed, it'll
 probably contain links to other repositories for specific projects related to
 courses, but I'll try to keep it all here.
 

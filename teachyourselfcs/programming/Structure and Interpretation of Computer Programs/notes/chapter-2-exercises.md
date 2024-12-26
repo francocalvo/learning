@@ -565,3 +565,40 @@ without creating a complex pair of functions to express the idea.
 (accumulate-n + 0 (list (list 1 2 3) (list 4 5 6) (list 7 8 9) (list 10 11 12)))
 ```
 
+### [Exercise 2.40](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-15.html#%_thm_2.40)
+
+```scheme
+(load "../utils.scm") ; flatmap definition
+
+(define (unique-pairs n)
+  (flatmap 
+    (lambda (i)
+      (map 
+        (lambda (j) (list i j))
+        (enumerate-interval 1 (- i 1))))
+    (enumerate-interval 2 n)))
+
+(unique-pairs 5)
+```
+
+### [Exercise 2.41](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-15.html#%_thm_2.41)
+
+```scheme
+(load "../utils.scm")
+
+(define (find-triple-s n s)
+  (filter 
+    (lambda (x) (= s (accumulate + 0 x)))
+    (flatmap
+      (lambda (x)
+        (flatmap 
+          (lambda (y) 
+            (map 
+              (lambda (z) (list x y z)) 
+              (enumerate-interval 1 (- y 1))))  ; z goes from 1 to y-1
+          (enumerate-interval 2 (- x 1))))      ; y goes from 2 to x-1
+      (enumerate-interval 3 n))))               ; x goes from 3 to n
+
+(find-triple-s 10 10)
+```
+

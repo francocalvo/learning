@@ -102,11 +102,11 @@
       (* (term a)
          (product term (next a) next b))))
 
-(define (accumulate combiner null-value term a next b)
-  (if (> a b)
-      null-value
-      (combiner (term a)
-                (accumulate combiner null-value term (next a) next b))))
+;; (define (accumulate combiner null-value term a next b)
+;;   (if (> a b)
+;;       null-value
+;;       (combiner (term a)
+;;                 (accumulate combiner null-value term (next a) next b))))
 
 (define (filtered-accumulate combiner null-value term a next b predicate)
   (if (> a b)
@@ -140,7 +140,6 @@
 
 ;;; GCD
 ;;; Greatest Common Divisor implementation using Euclidean algorithm
-
 (define (gcd a b)
   (if (= b 0)
       a
@@ -164,15 +163,14 @@
     (append (list (reverse (cdr p))) (car p))))
 
 ;;; Sequence operations
-
-(define (map proc items)
-  (if (null? items)
-    nil
-    (cons (proc (car items))
-          (map proc (cdr items)))))
+;; (define (map proc items)
+;;   (if (null? items)
+;;     nil
+;;     (cons (proc (car items))
+;;           (map proc (cdr items))))
 
 (define (filter pred items)
-  (cond ((null? items) nil)
+  (cond ((null? items) '())
         ((pred (car items))
          (cons (car items)
                (filter pred (cdr items))))
@@ -185,11 +183,14 @@
       (car items) 
       (accumulate oper initial (cdr items)))))
 
+(define (flatmap proc seq)
+  (accumulate append '() (map proc seq)))
 
 (define (enumerate-interval low high)
-  (if (low > high) 
-    nil
+  (if (> low high) 
+    '()
     (cons low (enumerate-interval (+ low 1) high))))
+
 
 (define (enumerate-tree lst)
   (cond ((null? lst) nil)
