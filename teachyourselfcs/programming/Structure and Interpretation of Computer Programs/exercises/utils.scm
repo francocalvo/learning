@@ -14,6 +14,15 @@
 (define (average x y)
   (/ (+ x y) 2.0))
 
+(define (exp b n)
+  (define (iter a b n) 
+    (cond 
+      ((= n 0) a)
+      ((even? n) (iter a (* b b) (/ n 2)))   
+      (else (iter (* a b) b (- n 1)))))
+
+  (iter 1 b n))
+
 ;;; Predicate Functions
 ;;; Used for testing various properties of numbers
 
@@ -147,3 +156,43 @@
 
 (define (numer rn) (car rn))
 (define (denom rn) (cdr rn))
+
+;;; Reverse a list
+(define (reverse p)
+  (if (null? (cdr p))
+    (car p)
+    (append (list (reverse (cdr p))) (car p))))
+
+;;; Sequence operations
+
+(define (map proc items)
+  (if (null? items)
+    nil
+    (cons (proc (car items))
+          (map proc (cdr items)))))
+
+(define (filter pred items)
+  (cond ((null? items) nil)
+        ((pred (car items))
+         (cons (car items)
+               (filter pred (cdr items))))
+        (else (filter pred (cdr items)))))
+
+(define (accumulate oper initial items)
+  (if (null? items)
+    initial
+    (oper 
+      (car items) 
+      (accumulate oper initial (cdr items)))))
+
+
+(define (enumerate-interval low high)
+  (if (low > high) 
+    nil
+    (cons low (enumerate-interval (+ low 1) high))))
+
+(define (enumerate-tree lst)
+  (cond ((null? lst) nil)
+        ((not (pair? lst)) (list lst))
+        (else (append (enumerate-tree (car lst))
+                      (enumerate-tree (cdr lst))))))

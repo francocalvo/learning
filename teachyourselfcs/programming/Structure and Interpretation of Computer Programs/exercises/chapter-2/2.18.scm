@@ -2,9 +2,10 @@
 ;; Exercise 2.18
 
 (define (reverse p)
-  (if (null? (cdr p))
-    (car p)
-    (append (list (reverse (cdr p))) (car p))))
+  (cond 
+    ((null? p) nil)
+    ((null? (cdr p)) (list (car p)))
+    (else (append (reverse (cdr p)) 
+                  (list (car p))))))
 
 (display (reverse (list 23 72 149 34)))
-
