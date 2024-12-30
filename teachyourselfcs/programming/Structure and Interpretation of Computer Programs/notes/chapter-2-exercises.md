@@ -4,7 +4,7 @@
 
 ### [Exercise 2.1](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-14.html#%_thm_2.1)
 
-```scheme
+```scheme linenums='1'
 (load "../utils.scm") ;; gcd implementation
 
 (define (make-rat n d)
@@ -26,7 +26,7 @@
 
 ### [Exercise 2.2](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-14.html#%_thm_2.2)
 
-```scheme
+```scheme linenums='1'
 (load "../utils.scm") ; average implementation
 
 ;; Point definition
@@ -66,7 +66,7 @@
 
 ### [Exercise 2.04](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-14.html#%_thm_2.04)
 
-```scheme
+```scheme linenums='1'
 (define (cons x y)
   (lambda (m) (m x y)))
 
@@ -84,7 +84,7 @@
 
 ### [Exercise 2.05](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-14.html#%_thm_2.05)
 
-```scheme
+```scheme linenums='1'
 (define zero (lambda (f) (lambda (x) x)))
 
 (define add-1 (lambda (n) (lambda (f) (lambda (x) (f ((n f) x))))))
@@ -103,7 +103,7 @@
 
 ### [Exercise 2.07](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-14.html#%_thm_2.07)
 
-```scheme
+```scheme linenums='1'
 (define (make-interval a b) (cons a b))
 
 (define add-interval
@@ -130,7 +130,7 @@
 
 My code..
 
-```scheme
+```scheme linenums='1'
 (define upper-bound
   (lambda (x)
     (cdr x)))
@@ -142,7 +142,7 @@ My code..
 
 ### [Exercise 2.08](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-14.html#%_thm_2.08)
 
-```scheme
+```scheme linenums='1'
 (load "./2.07.scm")
 
 (define sub-interval
@@ -156,7 +156,7 @@ My code..
 
 ### [Exercise 2.09](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-14.html#%_thm_2.09)
 
-```scheme
+```scheme linenums='1'
 (load "2.08.scm")
 
 (define (with interval)
@@ -181,7 +181,7 @@ My code..
 
 ### [Exercise 2.17](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-15.html#%_thm_2.17)
 
-```scheme
+```scheme linenums='1'
 (define (last-pair p)
   (if (null? (cdr p))
     (car p)
@@ -192,7 +192,7 @@ My code..
 
 ### [Exercise 2.18](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-15.html#%_thm_2.18)
 
-```scheme
+```scheme linenums='1'
 (define (reverse p)
   (cond 
     ((null? p) nil)
@@ -205,7 +205,7 @@ My code..
 
 ### [Exercise 2.19](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-15.html#%_thm_2.19)
 
-```scheme
+```scheme linenums='1'
 (define (cc amount coins)
   (cond ((= amount 0) 1)
         ((or (< amount 0) (= (length coins) 0)) 0)
@@ -223,7 +223,7 @@ My code..
 
 ### [Exercise 2.20](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-15.html#%_thm_2.20)
 
-```scheme
+```scheme linenums='1'
 (define (same-parity . l)
   (define (iter-sp res l rem)
     (if (null? l)
@@ -248,7 +248,7 @@ My code..
 
 ### [Exercise 2.21](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-15.html#%_thm_2.21)
 
-```scheme
+```scheme linenums='1'
 (load "../utils.scm") ; square definition
 
 (define (square-list items)
@@ -259,7 +259,7 @@ My code..
 
 ### [Exercise 2.23](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-15.html#%_thm_2.23)
 
-```scheme
+```scheme linenums='1'
 (define (for-each proc items)
   (cond ((null? items) #t)
         (else (proc (car items))
@@ -273,7 +273,7 @@ My code..
 
 ### [Exercise 2.25](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-15.html#%_thm_2.25)
 
-```scheme
+```scheme linenums='1'
 (define a (list 1 3 (list 5 7) 9))
 (define b (list (list 7)))
 (define c (list 1 (list 2 (list 3 (list 4 (list 5 (list 6 7)))))))
@@ -289,7 +289,7 @@ My code..
 
 ### [Exercise 2.27](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-15.html#%_thm_2.27)
 
-```scheme
+```scheme linenums='1'
 (define (deep-reverse p)
   (cond 
     ((null? p) '())
@@ -308,7 +308,7 @@ My code..
 
 ### [Exercise 2.28](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-15.html#%_thm_2.28)
 
-```scheme
+```scheme linenums='1'
 (define (fringe lst)
   (display "Fringe ")
   (display lst)
@@ -328,7 +328,7 @@ My code..
 
 ### [Exercise 2.29](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-15.html#%_thm_2.29)
 
-```scheme
+```scheme linenums='1'
 (define (make-mobile left right)
   (list left right))
 
@@ -346,7 +346,7 @@ My code..
 
 Part a
 
-```scheme
+```scheme linenums='1'
 (define (left-branch mobile)
   (car mobile))
 
@@ -362,7 +362,7 @@ Part a
 
 Part b
 
-```scheme
+```scheme linenums='1'
 (define (total-weight structure)
   (if (is-mobile? structure)
     (+  
@@ -373,7 +373,7 @@ Part b
 
 Part c
 
-```scheme
+```scheme linenums='1'
 (define (is-balanced? structure)
   (if (is-mobile? structure)
     (if (and
@@ -393,7 +393,7 @@ Part c
 
 Example usage. This should output a weight of 26, and not be balanced.
 
-```scheme
+```scheme linenums='1'
 (define m (make-mobile
   (make-branch 10 (make-mobile (make-branch 5 10) (make-branch 25 2)))
   (make-branch 10 (make-mobile
@@ -410,7 +410,7 @@ Example usage. This should output a weight of 26, and not be balanced.
 
 This one should output a weight of 40, and be balanced.
 
-```scheme
+```scheme linenums='1'
 (define balanced (make-mobile
   (make-branch 4 (make-mobile
                    (make-branch 6 (make-mobile (make-branch 6 4) (make-branch 4 6))) 
@@ -429,7 +429,7 @@ This one should output a weight of 40, and be balanced.
 
 ### [Exercise 2.30](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-15.html#%_thm_2.30)
 
-```scheme
+```scheme linenums='1'
 (load "../utils.scm") ;; square, map definitions
 
 (define (square-tree tree)
@@ -446,7 +446,7 @@ This one should output a weight of 40, and be balanced.
 
 ### [Exercise 2.31](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-15.html#%_thm_2.31)
 
-```scheme
+```scheme linenums='1'
 (load "../utils.scm") ;; square, map definitions
 
 (define (tree-map tree proc)
@@ -467,7 +467,7 @@ This one should output a weight of 40, and be balanced.
 
 ### [Exercise 2.33](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-15.html#%_thm_2.33)
 
-```scheme
+```scheme linenums='1'
 (load "../utils.scm") ;; acumulate definition
 (define (ac_map p sequence)
   (accumulate 
@@ -489,7 +489,7 @@ This one should output a weight of 40, and be balanced.
 
 ### [Exercise 2.34](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-15.html#%_thm_2.34)
 
-```scheme
+```scheme linenums='1'
 (load "../utils.scm")
 
 (define (horner-eval x coefficient-sequence)
@@ -510,7 +510,7 @@ This one should output a weight of 40, and be balanced.
 
 ### [Exercise 2.36](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-15.html#%_thm_2.36)
 
-```scheme
+```scheme linenums='1'
 (load "../utils.scm") ;; accumulate definition
 ```
 
@@ -518,7 +518,7 @@ Ok. So first we'll see the first solution I had.It's way too verbose but
 
 it works perfectly.
 
-```scheme
+```scheme linenums='1'
 
 (define (select-n n seq)
   (if (= n 0)
@@ -555,7 +555,7 @@ Later, I came across this solution... It does the exact same thing, but
 
 without creating a complex pair of functions to express the idea.
 
-```scheme
+```scheme linenums='1'
 (define (accumulate-n op init seqs)
   (if (null? (car seqs))
     '() 
@@ -567,7 +567,7 @@ without creating a complex pair of functions to express the idea.
 
 ### [Exercise 2.40](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-15.html#%_thm_2.40)
 
-```scheme
+```scheme linenums='1'
 (load "../utils.scm") ; flatmap definition
 
 (define (unique-pairs n)
@@ -583,7 +583,7 @@ without creating a complex pair of functions to express the idea.
 
 ### [Exercise 2.41](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-15.html#%_thm_2.41)
 
-```scheme
+```scheme linenums='1'
 (load "../utils.scm")
 
 (define (find-triple-s n s)

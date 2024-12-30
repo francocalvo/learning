@@ -4,7 +4,7 @@
 
 ### [Exercise 1.3](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-10.html#%_thm_1.3)
 
-```scheme
+```scheme linenums='1'
 (define (maxsum a b c) 
   (cond 
     ((> a b) (if (> b c) (+ a b) (+ a c)))
@@ -19,7 +19,7 @@
 
 ### [Exercise 1.8](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-10.html#%_thm_1.8)
 
-```scheme
+```scheme linenums='1'
 ( define (cubert-iter guess x)
   ;; (display guess) (newline)
   (if (cube-good-enough? guess x)
@@ -49,7 +49,7 @@
 
 ### [Exercise 1.11](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-11.html#%_thm_1.11)
 
-```scheme
+```scheme linenums='1'
 (define (f_r n)
   (cond ((< n 3) n)
         ((>= n 3)
@@ -81,7 +81,7 @@
 
 ### [Exercise 1.12](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-11.html#%_thm_1.12)
 
-```scheme
+```scheme linenums='1'
 (define (pascal col row)
   (cond ((= row 1) 1)
         ((= col 1) 1)
@@ -101,7 +101,7 @@
 
 ### [Exercise 1.16](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-11.html#%_thm_1.16)
 
-```scheme
+```scheme linenums='1'
 (define (even a) (= (remainder a 2) 0))
 
 (define (exp b n)
@@ -119,7 +119,7 @@
 
 ### [Exercise 1.17](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-11.html#%_thm_1.17)
 
-```scheme
+```scheme linenums='1'
 (define (double a) (* a 2))
 (define (halve a) (/ a 2))
 (define (even? a) (= 0 (remainder a 2)))
@@ -136,7 +136,7 @@
 
 ### [Exercise 1.18](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-11.html#%_thm_1.18)
 
-```scheme
+```scheme linenums='1'
 (define (double a) (* a 2))
 (define (halve a) (/ a 2))
 (define (even? a) (= 0 (remainder a 2)))
@@ -157,7 +157,7 @@
 
 ### [Exercise 1.21](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-11.html#%_thm_1.21)
 
-```scheme
+```scheme linenums='1'
 (define (smallest-divisor n)
   (define (divides? a b)
     (= (remainder b a) 0))
@@ -172,7 +172,7 @@
 
 I guess this made sense back then, but I don't see any runtime difference.
 
-```scheme
+```scheme linenums='1'
 
 (smallest-divisor 199)
 (smallest-divisor 1999)
@@ -183,7 +183,7 @@ I guess this made sense back then, but I don't see any runtime difference.
 
 ### [Exercise 1.22](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-11.html#%_thm_1.22)
 
-```scheme
+```scheme linenums='1'
 (define (square x)
   (* x x))
 
@@ -256,7 +256,7 @@ I guess this made sense back then, but I don't see any runtime difference.
 
 ### [Exercise 1.23](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-11.html#%_thm_1.23)
 
-```scheme
+```scheme linenums='1'
 (define (square x)
   (* x x))
 
@@ -329,7 +329,7 @@ I guess this made sense back then, but I don't see any runtime difference.
 
 ### [Exercise 1.29](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-12.html#%_thm_1.29)
 
-```scheme
+```scheme linenums='1'
 (define (sum term a next b)
   (if (> a b) 
     0 
@@ -371,7 +371,7 @@ I guess this made sense back then, but I don't see any runtime difference.
 
 ### [Exercise 1.30](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-12.html#%_thm_1.30)
 
-```scheme
+```scheme linenums='1'
 (define (sum term a next b)
   (define (iter a result)
     (if (> a b) 
@@ -415,7 +415,7 @@ I guess this made sense back then, but I don't see any runtime difference.
 
 ### [Exercise 1.31](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-12.html#%_thm_1.31)
 
-```scheme
+```scheme linenums='1'
 (define (product term a next b)
   (define (iter a result)
     (if (> a b) 
@@ -438,7 +438,7 @@ calculate the value of the formula given in the exercise. The formula is
 
 $\pi/4=(2*4*4*6*6*8*...)/(3*3*5*5*7*7*...)$.
 
-```scheme
+```scheme linenums='1'
 
 (define (pi-product n)
   (define (inc x) (+ x 1))
@@ -470,7 +470,7 @@ $\pi/4=(2*4*4*6*6*8*...)/(3*3*5*5*7*7*...)$.
 
 ### [Exercise 1.32](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-12.html#%_thm_1.32)
 
-```scheme
+```scheme linenums='1'
 (define (accumulate combiner null-value term a next b)
   (define (iter a result)
     (if (> a b)
@@ -498,7 +498,7 @@ $\pi/4=(2*4*4*6*6*8*...)/(3*3*5*5*7*7*...)$.
 
 ### [Exercise 1.33](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-12.html#%_thm_1.33)
 
-```scheme
+```scheme linenums='1'
 the sum of the squares of the prime numbers in the interval a
  to b
  (assuming that you have a prime? predicate already written)
@@ -527,7 +527,7 @@ the sum of the squares of the prime numbers in the interval a
 
 ### [Exercise 1.34](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-12.html#%_thm_1.34)
 
-```scheme
+```scheme linenums='1'
 (define (f g) (g 2))
 (define (square x) (* x x))
 
@@ -548,7 +548,7 @@ We'll go: (f f) --> (f 2) --> (2 2) --> error
 
 ### [Exercise 1.36](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-12.html#%_thm_1.36)
 
-```scheme
+```scheme linenums='1'
 (define tolerance 0.00001)
 
 (define (fixed-point f first-guess)
@@ -578,7 +578,7 @@ We'll go: (f f) --> (f 2) --> (2 2) --> error
 
 ### [Exercise 1.37](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-12.html#%_thm_1.37)
 
-```scheme
+```scheme linenums='1'
 (define (cont-fract n d k)
   (if (= k 0)
       0
@@ -592,14 +592,14 @@ The desired value is: 0.6180
 
 It can be achieved by calling with k = 11
 
-```scheme
+```scheme linenums='1'
 (cont-fract n n 11) ; 
 (cont-fract n n 11)
 ```
 
 ### [Exercise 1.38](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-12.html#%_thm_1.38)
 
-```scheme
+```scheme linenums='1'
 (define (cont-fract n d k)
   (define (cont-fract-inter n d k i)
     (if (= i k)
@@ -617,13 +617,13 @@ It can be achieved by calling with k = 11
 
 The desired value is $\e - 2$ which is approximately 0.71828
 
-```scheme
+```scheme linenums='1'
 (cont-fract n d 1000)
 ```
 
 ### [Exercise 1.39](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-12.html#%_thm_1.39)
 
-```scheme
+```scheme linenums='1'
 (define (cont-fract combinator null-value n d k)
   (define (cont-fract-inter n d k i)
     (if (= i k)
@@ -651,13 +651,13 @@ The desired value is $\e - 2$ which is approximately 0.71828
 
 ### [Exercise 1.40](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-12.html#%_thm_1.40)
 
-```scheme
+```scheme linenums='1'
 (define (cubic a b c) (lambda (x) (+ (* x x x) (* a x x) (* b x) c)))
 ```
 
 ### [Exercise 1.41](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-12.html#%_thm_1.41)
 
-```scheme
+```scheme linenums='1'
 (define (double f)
   (lambda (x) (f (f x))))
 
@@ -668,7 +668,7 @@ The desired value is $\e - 2$ which is approximately 0.71828
 
 ### [Exercise 1.42](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-12.html#%_thm_1.42)
 
-```scheme
+```scheme linenums='1'
 (define (compose f g)
   (lambda (x) (f (g x))))
 
@@ -680,7 +680,7 @@ The desired value is $\e - 2$ which is approximately 0.71828
 
 ### [Exercise 1.43](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-12.html#%_thm_1.43)
 
-```scheme
+```scheme linenums='1'
 (define (compose f g)
   (lambda (x) (f (g x))))
 
@@ -709,7 +709,7 @@ The desired value is $\e - 2$ which is approximately 0.71828
 
 ### [Exercise 1.44](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book-Z-H-12.html#%_thm_1.44)
 
-```scheme
+```scheme linenums='1'
 (define dx 0.000001)
 
 (define soothe

@@ -153,7 +153,7 @@ def process_chapter(chapter_path):
 
         for segment_type, content in data["content_segments"]:
             if segment_type == "code":
-                markdown_content += "```scheme\n"
+                markdown_content += "```scheme linenums='1'\n"
                 markdown_content += content.rstrip() + "\n"
                 markdown_content += "```\n\n"
             else:
