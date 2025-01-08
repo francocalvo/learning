@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://mydomain.org/mysite/</loc>
+         <lastmod>2025-01-08</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/teachyourselfcs/programming/Structure%20and%20Interpretation%20of%20Computer%20Programs/</loc>
+         <lastmod>2025-01-08</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/teachyourselfcs/programming/Structure%20and%20Interpretation%20of%20Computer%20Programs/Exercises/chapter-1-exercises/</loc>
+         <lastmod>2025-01-08</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/teachyourselfcs/programming/Structure%20and%20Interpretation%20of%20Computer%20Programs/Exercises/chapter-2-exercises/</loc>
+         <lastmod>2025-01-08</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/teachyourselfcs/programming/Structure%20and%20Interpretation%20of%20Computer%20Programs/notes/chapter-1/</loc>
+         <lastmod>2025-01-08</lastmod>
+    </url>
+</urlset>
